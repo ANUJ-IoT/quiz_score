@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --color-back: #a3c4f3;
+  --color-button: #3a86ff;
+  --color-Login: #c5b3d3;
+  --color-Special: #ecdbba;
+}
