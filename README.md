@@ -30,7 +30,7 @@ A simple quiz web application with minimal authentication, built with React, Nod
 ### Setup
 
 1. Clone the repo
-   `git clone https://github.com/[your-username]/[repo-name].git`
+   `git clone https://github.com/ANUJ-IoT/quiz_score.git`
 2. Set up the database: create a MySQL database and run `[schema.sql]`
 3. Backend:
    - `cd backend`
