@@ -43,52 +43,57 @@ export default function Login({ setShowLogin, showLogin, setUserName }) {
       <div
         className={`absolute top-50 left-135 rounded-2xl ${showLogin ? "z-20" : "z-10"} bg-white/10 backdrop-blur-2xl`}
       >
-        <fieldset className="fieldset rounded-box w-3xl p-10">
-          <legend className="fieldset-legend text-3xl font-bold mb-4">
-            Login
-          </legend>
-          <button
-            type="button"
-            onClick={() => setShowLogin(false)}
-            className="absolute top-10 right-4 btn btn-circle btn-ghost"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
+        <form>
+          <fieldset className="fieldset rounded-box w-3xl p-10">
+            <legend className="fieldset-legend text-3xl font-bold mt-5">
+              Login
+            </legend>
+            <button
+              type="button"
+              onClick={() => setShowLogin(false)}
+              className="absolute top-10 right-4 btn btn-circle btn-ghost"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 6l12 12M18 6L6 18"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 6l12 12M18 6L6 18"
+                />
+              </svg>
+            </button>
+            <label className="flex flex-col text-2xl font-extrabold">
+              User Name
+              <input
+                type="text"
+                className="input input-lg w-full"
+                placeholder="User Name / Email"
+                ref={loginName}
+                required
               />
-            </svg>
-          </button>
-          <label className="label">User Name</label>
-          <input
-            type="text"
-            className="input input-lg w-full"
-            placeholder="User Name / Email"
-            ref={loginName}
-            required
-          />
+            </label>
 
-          <label className="label">Password</label>
-          <input
-            type="password"
-            className="input input-lg w-full"
-            placeholder="Password"
-            ref={loginPass}
-            required
-          />
-
-          <button className="btn btn-neutral mt-4" onClick={setName}>
-            Login
-          </button>
-        </fieldset>
+            <label className="flex flex-col text-2xl font-extrabold">
+              Password
+              <input
+                type="password"
+                className="input input-lg w-full"
+                placeholder="Password"
+                ref={loginPass}
+                required
+              />
+            </label>
+            <button className="btn btn-neutral mt-4" onClick={setName}>
+              Login
+            </button>
+          </fieldset>
+        </form>
       </div>
     </>
   );
