@@ -1,22 +1,21 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { loginUser } from "../api";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../context/AuthContext";
 
 export default function Login({ setShowLogin, showLogin, setUserName }) {
-  if (!showLogin) return null;
-
   const { setIsLoggedIn } = useAuth();
 
-  const loginName = useRef();
-  const loginPass = useRef();
+  const [user, setUser] = useState({ name: "", password: "" });
 
-  async function setName() {
-    const username = loginName.current.value.trim();
-    const password = loginPass.current.value.trim();
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
-    const result = await loginUser({ username, password });
+  const login = async (e) => {
+    e.preventDefault();
+    const result = await loginUser(user.name, user.password);
 
     if (result.message === "Login Succesfull") {
       toast.success("Login Successfull!", {
@@ -31,19 +30,21 @@ export default function Login({ setShowLogin, showLogin, setUserName }) {
         transition: Bounce,
       });
       setIsLoggedIn(true);
-      setUserName(username);
+      setUserName(user.name);
       setShowLogin(false);
     } else {
+      console.log(result);
       toast.error("Credentials are incorrect. Try again!");
     }
-  }
+  };
+  if (!showLogin) return null;
   return (
     <>
       {/* This is login form*/}
       <div
         className={`absolute top-50 left-135 rounded-2xl ${showLogin ? "z-20" : "z-10"} bg-white/10 backdrop-blur-2xl`}
       >
-        <form>
+        <form onSubmit={login}>
           <fieldset className="fieldset rounded-box w-3xl p-10">
             <legend className="fieldset-legend text-3xl font-bold mt-5">
               Login
@@ -72,9 +73,10 @@ export default function Login({ setShowLogin, showLogin, setUserName }) {
               User Name
               <input
                 type="text"
-                className="input input-lg w-full"
+                name="name"
+                onChange={handleChange}
+                className="input input-lg w-full outline-none"
                 placeholder="User Name / Email"
-                ref={loginName}
                 required
               />
             </label>
@@ -83,13 +85,14 @@ export default function Login({ setShowLogin, showLogin, setUserName }) {
               Password
               <input
                 type="password"
-                className="input input-lg w-full"
+                name="password"
+                onChange={handleChange}
+                className="input input-lg w-full outline-none"
                 placeholder="Password"
-                ref={loginPass}
                 required
               />
             </label>
-            <button className="btn btn-neutral mt-4" onClick={setName}>
+            <button type="submit" className="btn btn-neutral mt-4">
               Login
             </button>
           </fieldset>

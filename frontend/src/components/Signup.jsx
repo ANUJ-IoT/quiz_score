@@ -1,21 +1,19 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { registerUser } from "../api";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Signup({ setShowSignUp, showSignUp }) {
-  if (!showSignUp) return null;
+  const [user, setUser] = useState({ name: "", password: "" });
 
-  const signName = useRef();
-  const signPass = useRef();
-  let username = null;
-  let password = null;
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
-  async function setNewData() {
-    username = signName.current.value;
-    password = signPass.current.value;
+  const register = async (e) => {
+    e.preventDefault();
 
-    const result = await registerUser({ username, password });
+    const result = await registerUser(user.name, user.password);
 
     if (result.message === "User Created") {
       toast.success("Registration Successfull!", {
@@ -31,15 +29,18 @@ export default function Signup({ setShowSignUp, showSignUp }) {
       });
       setShowSignUp(false);
     } else {
+      console.log(result);
+
       toast.error("Registration Failed. Please Try Again!");
     }
-  }
+  };
+  if (!showSignUp) return null;
   return (
     <>
       <div
         className={`absolute left-135 top-50 ${showSignUp ? "z-20" : "z-10"} rounded-2xl bg-white/10 backdrop-blur-2xl`}
       >
-        <form>
+        <form onSubmit={register}>
           <fieldset className="fieldset w-3xl p-10 rounded-2xl">
             <legend className="fieldset-legend text-3xl font-bold mt-5 ">
               Sign Up
@@ -68,9 +69,10 @@ export default function Signup({ setShowSignUp, showSignUp }) {
               Name
               <input
                 type="text"
+                name="name"
+                onChange={handleChange}
                 className="input input-lg w-full outline-none"
                 placeholder="Name"
-                ref={signName}
                 required
               />
             </label>
@@ -78,13 +80,14 @@ export default function Signup({ setShowSignUp, showSignUp }) {
               Password
               <input
                 type="password"
+                name="password"
+                onChange={handleChange}
                 className="input input-lg w-full outline-none"
                 placeholder="Password"
-                ref={signPass}
                 required
               />
             </label>
-            <button className="btn btn-neutral mt-4" onClick={setNewData}>
+            <button type="submit" className="btn btn-neutral mt-4">
               Sign&nbsp;Up
             </button>
           </fieldset>

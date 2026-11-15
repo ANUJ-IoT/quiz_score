@@ -57,9 +57,7 @@ export default function Home() {
               alt="Bulb image"
               className="rounded-2xl w-20 h-20 mt-6 ml-10"
             />
-            <p className="text-5xl p-10 font-bold">
-              Stranger's <span className="text-Special">Quiz</span>
-            </p>
+            <p className="text-5xl p-10 font-bold">Stranger's Quiz</p>
           </div>
 
           {/* Buttons for Login and Sign Up */}
@@ -117,7 +115,6 @@ export default function Home() {
           </div>
 
           {/* This is Main section for quiz configuration */}
-          {/* Login and sign up form has to be designed again a little and login of both appearance has to be set */}
           <div className=" w-200 rounded-2xl p-10 bg-white/10 backdrop-blur-xl order border-white/20 shadow-2xl h-fit">
             <div className="mb-10">
               <ol className="text-3xl font-semibold">
