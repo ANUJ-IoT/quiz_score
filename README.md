@@ -45,3 +45,25 @@ A simple quiz web application with minimal authentication, built with React, Nod
 ## Credits
 
 Quiz questions are provided by [Open Trivia DB](https://opentdb.com). Its flexible parameters make it easy to cover many more quiz topics.
+
+### screenshots
+
+### Login
+
+![Login](screenshots/Login.png)
+
+### Dashbord
+
+![Dashboard](screenshots/Dashboard.png)
+
+### Quiz View
+
+![Quiz View](screenshots/Quiz.png)
+
+### Quiz End
+
+![Quiz End](screenshots/Quiz_End.png)
+
+### Leaderboard
+
+![Leaderboard](screenshots/LeaderBoard.png)
