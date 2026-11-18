@@ -1,4 +1,4 @@
-const Base = "http://localhost:3001";
+const Base = import.meta.env.VITE_API_URL;
 
 export async function getLeaderboard() {
   const data = await fetch(`${Base}/leaderboard`).then((r) => r.json());
