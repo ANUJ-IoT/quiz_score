@@ -17,7 +17,7 @@ export default function Login({ setShowLogin, showLogin, setUserName }) {
     e.preventDefault();
     const result = await loginUser(user.name, user.password);
 
-    if (result.message === "Login Succesfull") {
+    if (result.message === "Successfull.") {
       toast.success("Login Successfull!", {
         position: "bottom-right",
         autoClose: 5000,
@@ -33,7 +33,6 @@ export default function Login({ setShowLogin, showLogin, setUserName }) {
       setUserName(user.name);
       setShowLogin(false);
     } else {
-      console.log(result);
       toast.error("Credentials are incorrect. Try again!");
     }
   };

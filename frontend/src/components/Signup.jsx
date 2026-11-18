@@ -14,8 +14,9 @@ export default function Signup({ setShowSignUp, showSignUp }) {
     e.preventDefault();
 
     const result = await registerUser(user.name, user.password);
+    console.log(result);
 
-    if (result.message === "User Created") {
+    if (result.message === "Sucessfull.") {
       toast.success("Registration Successfull!", {
         position: "bottom-right",
         autoClose: 5000,
@@ -29,8 +30,6 @@ export default function Signup({ setShowSignUp, showSignUp }) {
       });
       setShowSignUp(false);
     } else {
-      console.log(result);
-
       toast.error("Registration Failed. Please Try Again!");
     }
   };

@@ -1,28 +1,30 @@
 import express from "express";
 
-const router = express.Router();
+export default function leaderBoardRoutes(pool) {
+  const router = express.Router();
 
-export default function leaderBoardRoutes(db) {
-  router.get("/", (req, res) => {
-    db.query(
-      "SELECT * FROM leaderboard ORDER BY score DESC LIMIT 10",
-      (err, result) => {
-        if (err) return res.status(401).json({ err: err.message });
-        res.json(result);
-      },
-    );
+  router.get("/", async (req, res) => {
+    try {
+      const [rows] = await pool.execute(
+        "SELECT * FROM leaderboard ORDER BY score DESC LIMIT 10",
+      );
+      return res.status(200).json({ message: rows });
+    } catch (error) {
+      return res.status(500).json({ message: "Internal Server Error." });
+    }
   });
 
-  router.post("/", (req, res) => {
+  router.post("/", async (req, res) => {
     const { username, score, category } = req.body;
-    db.query(
-      "INSERT INTO leaderboard (username , score, category ) VALUES (?,?,?)",
-      [username, score, category],
-      (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({ id: result.insertId });
-      },
-    );
+    try {
+      await pool.execute(
+        "INSERT INTO leaderboard (name, score, category) VALUES (?,?,?)",
+        [username, score, category],
+      );
+      return res.status(201).json({ message: "Inserted Sucessfully" });
+    } catch (error) {
+      return res.status(500).json({ message: "Internal server error." });
+    }
   });
 
   return router;

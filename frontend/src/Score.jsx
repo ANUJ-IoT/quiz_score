@@ -12,12 +12,10 @@ export default function Score() {
   useEffect(() => {
     async function data() {
       const data = await getLeaderboard();
-      setResult(data);
+      setResult(data.message);
     }
     data();
   }, [result]);
-
-  console.log(result);
 
   return (
     <>
@@ -57,14 +55,16 @@ export default function Score() {
                   </thead>
                   <tbody>
                     {result.length === 0 ? (
-                      <td>Loading....</td>
+                      <tr>
+                        <td>Loading....</td>
+                      </tr>
                     ) : (
                       result.map((item, i) => (
                         <tr key={i} className="text-center">
-                          <td>{i}</td>
-                          <td>{item.username}</td>
+                          <td>{i + 1}</td>
+                          <td>{item.name}</td>
                           <td>{item.score}</td>
-                          <td>{item.date.slice(0, 16).replace("T", "")}</td>
+                          <td>{item.date.slice(0, 16).replace("T", " ")}</td>
                         </tr>
                       ))
                     )}

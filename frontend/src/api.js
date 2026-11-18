@@ -14,23 +14,20 @@ export async function saveScore({ username, score, category }) {
   return data;
 }
 
-export async function loginUser(username, password) {
+export async function loginUser(name, password) {
   const data = await fetch(`${Base}/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ name, password }),
   }).then((r) => r.json());
-  console.log("this is for the login", data);
   return data;
 }
 
-export async function registerUser(username, password) {
-  console.log("i got till here");
+export async function registerUser(name, password) {
   const data = await fetch(`${Base}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ name, password }),
   }).then((r) => r.json());
-  console.log("this is for the register", data);
   return data;
 }
